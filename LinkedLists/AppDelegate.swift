@@ -12,35 +12,39 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        playWithLinkedLists()
         return true
     }
+    
+    func playWithLinkedLists() {
 
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+        let words = LinkedList.sampleWords
+        
+        // generate a linked list to play with
+        guard let headNode = LinkedList.generateListFromWords(words) else { return }
+
+        // print
+        print ("-- LinkedList: " )
+        LinkedList.printList(headNode)
+       
+        //reverse it
+        print ("-- Reversed:" )
+        let revHeadNode = LinkedList.reverseList(startingFrom: headNode)
+        LinkedList.printList(revHeadNode)
+        
+
+        //find kth node from end
+        print ("-- Kth Node from end's value:" )
+        if let kthNode = LinkedList.findKthFromEndOfList(startingFrom: revHeadNode, k: 3) {
+            print(kthNode.value)
+        } else {
+            print("invalid input")
+        }
+
+
     }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-
 
 }
 
